@@ -65,6 +65,23 @@ commands = [
     "Tell me a dad joke"
 ]
 
+story = [
+    "A scientist built a machine to peer into parallel universes. At first, he saw versions of himself living different lives—some happier, some tragic. But then he noticed a pattern: every version of himself was being watched by a shadowy figure in the background. One night, his machine flickered, and instead of another universe, he saw his own room from a different angle. The screen turned black, and a message appeared: 'We see you too.' The machine short-circuited, and his door creaked open on its own. Heart pounding, he grabbed a wrench and backed away. A whisper echoed from the darkness: 'You shouldn’t have looked.' His phone buzzed—an email from himself, dated tomorrow. The subject line: 'RUN.' But before he could move, the machine turned back on by itself, showing a live feed of his room—except he wasn’t in it anymore.",
+
+    "A man inherited an old pocket watch that didn’t tell time—it counted down. At first, he ignored it, thinking it broken. But when it reached zero, a stranger knocked on his door, delivering news that changed his life. He tested the watch again, setting it manually. Every time it hit zero, something significant happened: a car crash, a job offer, a phone call from an old friend. One day, he woke up to see the numbers impossibly high, ticking down rapidly. Panicked, he tried to stop it, but the hands wouldn’t budge. The countdown hit ten… nine… eight. The sky outside darkened. People froze mid-step. The world itself seemed to hold its breath. At zero, everything went silent. The watch fell from his hand, shattering. When he opened his eyes, he was the only person left. Buildings stood empty. Streets were abandoned. The only sound was ticking—coming from inside his own chest.",
+
+    "A woman moved into an apartment with a single, locked door that the landlord said led to nothing. At night, she could hear soft whispers and occasional tapping from the other side. One evening, she pressed her ear against it and whispered, 'Hello?' The tapping stopped. Hours later, she awoke to find the door wide open, revealing a dark hallway that shouldn’t exist. A single candle burned in the distance. She stepped forward, heart pounding, and the door slammed shut behind her. The hallway stretched endlessly in both directions. Doors lined the walls, each with her name etched into them. One creaked open, revealing her bedroom—but inside, she saw herself asleep in bed. A figure stood over her sleeping body, whispering something in her ear. It turned, smiling at her with her own face. 'You shouldn't be here,' it said. The candle flickered out, and the darkness swallowed her whole.",
+
+    "A little boy found an old Polaroid camera at a yard sale. When he took a picture, the image showed not the present, but what would happen five minutes in the future. At first, it was fun—he predicted his mother’s phone calls, saw his dog running in the yard. But then he took a photo of his bedroom and saw his closet door open, revealing a shadowy figure. He stared at the picture in horror, slowly turning toward the closet. The door creaked open, exactly as in the photo. Something was waiting inside. He ran to his parents, but when they returned, the closet was empty. That night, he placed the camera beside his bed and set it on a timer. In the morning, he checked the photo. It showed him sleeping peacefully—until a long, pale hand reached from under his bed, wrapping around his ankle. He dropped the camera and felt something brush against his foot.",
+
+    "A deep-sea diver discovered an ancient shipwreck untouched by time. The wood was unrotted, the lanterns still lit, as if the crew had only just left. But when he swam inside, he found tables set for a meal, clothes laid out for bed, and a journal open to the last entry: 'We are not alone. It watches from below.' The ship creaked, and outside, a massive shadow passed overhead. The water turned black, and the diver’s flashlight flickered out. A low hum vibrated through the ocean. Desperate, he swam toward the exit, but the ship had changed. The corridors stretched endlessly, leading him deeper inside. He turned a corner and found himself staring at a wall of glass. On the other side was his reflection—but it blinked before he did. The glass shattered, water rushed in, and the last thing he saw was his own face smiling at him as everything went dark.",
+
+    "A girl discovered that her reflection lagged behind her movements. At first, it was only by a fraction of a second, but as days passed, the delay grew. One night, her reflection stopped mimicking her altogether, staring at her with a cold, knowing smile. Terrified, she covered the mirror. The next morning, it was shattered, and written on the wall in her own handwriting were the words: 'I am free now.' She turned to see her reflection standing outside her window, staring in with empty eyes. Panicked, she ran downstairs, but every reflective surface now showed her reflection moving freely. In the bathroom mirror, it whispered, 'It’s your turn now.' A cold hand gripped her shoulder. The world spun, and when she blinked, she was in the mirror. Outside, her reflection—now in control—smirked and turned away, leaving her trapped in the glass, screaming silently.",
+
+    "A man’s dog started barking at the basement door every night at exactly 3:13 AM. Thinking it was mice, he set up a camera. The footage showed the door slowly creaking open on its own, though the basement was locked. One night, he heard scratching from below and called a locksmith to remove the rusted lock. As soon as it clicked open, a horrible wailing filled the house. The basement light flickered, revealing dozens of claw marks covering the walls. Something had been trying to get out. Or in. The dog whimpered and backed away as shadows stretched toward them. The man slammed the door shut, heart pounding. But when he checked the footage later, he saw himself opening the door—except he never did. The final frame showed him sleeping peacefully in bed, while the basement door, wide open, led to complete darkness. Something had come upstairs."
+]
+
+
 def chat():
     message = input(f"{name}: ").lower()  # Convert to lowercase for case insensitivity
 
@@ -78,6 +95,10 @@ def chat():
 
     elif "joke" in message:
         print(f"Nova: {random.choice(jokes)}")
+        chat()
+
+    elif "story" in message:
+        print(f"Nova: Heres a short story for you!\n{random.choice(story)}")
         chat()
 
     elif any(char in message for char in "1234567890"):
@@ -102,4 +123,3 @@ time.sleep(3)
 cls()
 print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
 chat()
-
