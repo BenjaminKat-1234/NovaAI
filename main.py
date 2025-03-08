@@ -124,7 +124,7 @@ banned_words = ["Murder", "Kill", "Die"]
 
 
 def chat():
-    message = input(f"{name}: ").lower()  # Convert to lowercase for case insensitivity
+    message = input(f"{name}: ").lower()
 
     if "!responses" == message:
         print(f"Nova: Try {random.choice(commands)}!")
@@ -157,13 +157,12 @@ def chat():
     
     
 
-    elif any(greeting.lower() in message for greeting in greeting_list):  # Adjusted to check against lowercase
+    elif any(greeting.lower() in message for greeting in greeting_list):
         print(f"Nova: {random.choice(greeting_list)}")
         chat()
 
     else:
-        print("Nova: I do not understand this. Try using !responses!")  # Proper indentation
-        chat()
+        print("Nova: I do not understand this. Try using !responses!")
 
 
 # Introduction
@@ -177,3 +176,4 @@ time.sleep(3)
 cls()
 print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
 chat()
+
