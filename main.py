@@ -3,6 +3,8 @@ import random
 import os
 import platform
 import sys
+import re
+
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -134,6 +136,14 @@ def chat():
         print(f"Nova: {random.choice(greeting_list)}, {name} ^_^")
         chat()
     
+        match = re.search(r'(\d+)', message)  # Looks for a single number
+
+    if match:
+        max_number = int(match.group(1))  # Extract the number (upper limit)
+        print(f"Nova: Your random number is: {random.randint(1, max_number)}")  # Random number between 1 and the extracted number
+    else:
+        print("Nova: I couldn't find a valid number in your message.")
+    
     # DEVELOPER COMMANDS
 
     elif "cmd dev enable" == message: #KEEP AT TOP OF DEV COMMANDS
@@ -177,13 +187,16 @@ def chat():
     elif "story" in message:
         print(f"Nova: Heres a short story for you!\n{random.choice(story)}")
         chat()
+    
 
 
-    elif any(char in message for char in "1234567890"):
-        print(f"Nova: I'm bad with numbers.")
-        chat()
-    
-    
+    match = re.search(r'(\d+)', message)  # Looks for a single number
+
+    if match:
+        max_number = int(match.group(1))  # Extract the number (upper limit)
+        print(f"Nova: Your random number is: {random.randint(1, max_number)}")  # Random number between 1 and the extracted number
+    else:
+        print("Nova: I couldn't find a valid number in your message.")
 
     elif any(greeting.lower() in message for greeting in greeting_list):
         print(f"Nova: {random.choice(greeting_list)}")
@@ -191,6 +204,7 @@ def chat():
 
     else:
         print("Nova: I do not understand this. Try using !responses!")
+        chat()
 
 
 # Introduction
