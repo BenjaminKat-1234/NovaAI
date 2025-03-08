@@ -133,6 +133,34 @@ def chat():
     elif "Nova".lower() in message:
         print(f"Nova: {random.choice(greeting_list)}, {name} ^_^")
         chat()
+    
+    # DEVELOPER COMMANDS
+
+    elif "cmd dev enable" == message: #KEEP AT TOP OF DEV COMMANDS
+    
+        dev = input("System: Enable developer mode? This adds experimental features and commands to the AI! Continue? (y/n) ")
+        if dev == "y":
+            print("System: Developer mode enabled!")
+            chat()
+            
+        if dev == "n":
+            print("System: Developer mode was not enabled!")
+            chat()
+            
+        else:
+            print("System: Invalid response. Failed to continue.")
+            chat()
+
+        
+
+    elif "cmd dev file README.md" == message:
+        if dev == "n":
+            print("System: Developer mode is not enabled!")
+            chat()
+        else:
+            print(f"This project is a W.I.P.")
+            chat()
+
 
     elif "!clear" == message:
         cls()
@@ -176,4 +204,3 @@ time.sleep(3)
 cls()
 print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
 chat()
-
