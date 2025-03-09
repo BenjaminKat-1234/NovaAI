@@ -219,7 +219,7 @@ def chat():
         chat()
     
     elif "🐒🍌" == message:
-        if client == "monke":
+        if name == "MONKE":
             print("Nova: 🐒🍌")
             chat()
         else:
