@@ -5,7 +5,9 @@ import platform
 import sys
 import re
 
+# CLIENT USER
 client = "user"
+
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -144,10 +146,17 @@ banned_words = ["Murder", "Kill", "Die"]
 
 
 def chat():
+    global name, client
+
     message = input(f"{name}: ").lower()
 
     if "!responses" == message:
         print(f"Nova: Try {random.choice(commands)}!")
+        chat()
+    
+    elif "!name" == message:
+        newname = input("Nova: What is you name? ")
+        name = newname
         chat()
     
     elif "Nova".lower() in message:
@@ -184,7 +193,10 @@ def chat():
 
     elif "cmd dev edit client" == message:
         if name == "DEV":
-            input("System: ENTER CLIENT NAME: ")
+            client = input("System: ENTER CLIENT NAME: ")
+            chat()
+        else:
+            chat()
 
     elif "!clear" == message:
         cls()
@@ -249,6 +261,14 @@ elif client == "user":
         name = "Fake Nova"
     elif name.lower() == "dev":
         name = "User"
+    elif name.lower() == "monke":
+        print(color.YELLOW + color.BOLD + "Nova: 🐒🍌")
+        print("Launching Nova...")
+        time.sleep(3)
+        cls()
+        name = "MONKE"
+        print(color.YELLOW + color.BOLD + "Nova: 🐒🍌")
+        chat()
 
     print(f"Nova: {random.choice(greeting_list)}, {name}! That's a great name!")
     print("Launching Nova...")
