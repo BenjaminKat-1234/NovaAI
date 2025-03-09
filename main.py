@@ -5,11 +5,24 @@ import platform
 import sys
 import re
 
-
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
 greeting_list = ["Hello","Hola","Hi", "Howdy", "Are you kidding me", "Greetings", "Sup", "Yo", "Oi"]
+
+coin = ["Heads", "Tails"]
+
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
 
 jokes = [
     "What did one hat say to the other? You wait here, I'll go on ahead.",
@@ -67,7 +80,10 @@ commands = [
     "Tell me a joke",
     "Tell me a dad joke",
     "Tell me a story",
-    "Generate a story"
+    "Generate a story",
+    "Tell me a random number in between 1 and 1000",
+    "Tell me a random number in between 1 and 100",
+    "Flip a coin"
 ]
 
 story = [
@@ -132,17 +148,31 @@ def chat():
         print(f"Nova: Try {random.choice(commands)}!")
         chat()
     
+    if "!quit" or "!end" == message:
+        quit = input("System: Quit? (Y/N) ")
+
+        if quit == "y":
+            print("System: Goodbye!")
+        
+        else:
+            quit = ""
+            chat()
+    
     elif "Nova".lower() in message:
         print(f"Nova: {random.choice(greeting_list)}, {name} ^_^")
         chat()
     
-        match = re.search(r'(\d+)', message)  # Looks for a single number
+    match = re.findall(r'(\d+)', message)
 
     if match:
-        max_number = int(match.group(1))  # Extract the number (upper limit)
+        numbers = [int(num) for num in match]
+        if numbers[0] == 1:
+            numbers.pop(0) # Ignore the number "1"
+    
+        max_number = numbers[0]
         print(f"Nova: Your random number is: {random.randint(1, max_number)}")  # Random number between 1 and the extracted number
-    else:
-        print("Nova: I couldn't find a valid number in your message.")
+        chat()
+
     
     # DEVELOPER COMMANDS
 
@@ -160,16 +190,14 @@ def chat():
         else:
             print("System: Invalid response. Failed to continue.")
             chat()
-
         
+    elif "cmd dev debug" == message:
+            print("System:\n" + color.BOLD + f"USER_NAME: {name}" + color.END)
+            chat()
 
     elif "cmd dev file README.md" == message:
-        if dev == "n":
-            print("System: Developer mode is not enabled!")
-            chat()
-        else:
-            print(f"This project is a W.I.P.")
-            chat()
+        print(f"This project is a W.I.P.")
+        chat()
 
 
     elif "!clear" == message:
@@ -183,20 +211,14 @@ def chat():
     elif "joke" in message:
         print(f"Nova: {random.choice(jokes)}")
         chat()
+    
+    elif "coin" in message:
+        print(f"Nova: It's {random.choice(coin)}!")
+        chat()
 
     elif "story" in message:
         print(f"Nova: Heres a short story for you!\n{random.choice(story)}")
         chat()
-    
-
-
-    match = re.search(r'(\d+)', message)  # Looks for a single number
-
-    if match:
-        max_number = int(match.group(1))  # Extract the number (upper limit)
-        print(f"Nova: Your random number is: {random.randint(1, max_number)}")  # Random number between 1 and the extracted number
-    else:
-        print("Nova: I couldn't find a valid number in your message.")
 
     elif any(greeting.lower() in message for greeting in greeting_list):
         print(f"Nova: {random.choice(greeting_list)}")
