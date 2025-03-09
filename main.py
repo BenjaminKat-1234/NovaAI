@@ -5,6 +5,8 @@ import platform
 import sys
 import re
 
+client = "user"
+
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
@@ -148,16 +150,6 @@ def chat():
         print(f"Nova: Try {random.choice(commands)}!")
         chat()
     
-    if "!quit" or "!end" == message:
-        quit = input("System: Quit? (Y/N) ")
-
-        if quit == "y":
-            print("System: Goodbye!")
-        
-        else:
-            quit = ""
-            chat()
-    
     elif "Nova".lower() in message:
         print(f"Nova: {random.choice(greeting_list)}, {name} ^_^")
         chat()
@@ -175,30 +167,24 @@ def chat():
 
     
     # DEVELOPER COMMANDS
-
-    elif "cmd dev enable" == message: #KEEP AT TOP OF DEV COMMANDS
-    
-        dev = input("System: Enable developer mode? This adds experimental features and commands to the AI! Continue? (y/n) ")
-        if dev == "y":
-            print("System: Developer mode enabled!")
-            chat()
-            
-        if dev == "n":
-            print("System: Developer mode was not enabled!")
-            chat()
-            
-        else:
-            print("System: Invalid response. Failed to continue.")
-            chat()
         
     elif "cmd dev debug" == message:
-            print("System:\n" + color.BOLD + f"USER_NAME: {name}" + color.END)
-            chat()
+            if name == "DEV":
+                print(f"System:\nNAME: {name}\nCLIENT: {client}")
+                chat()
+            else:
+                chat()
 
     elif "cmd dev file README.md" == message:
-        print(f"This project is a W.I.P.")
-        chat()
+        if name == "DEV":
+            print(f"This project is a W.I.P.")
+            chat()
+        else:
+            chat()
 
+    elif "cmd dev edit client" == message:
+        if name == "DEV":
+            input("System: ENTER CLIENT NAME: ")
 
     elif "!clear" == message:
         cls()
@@ -219,6 +205,14 @@ def chat():
     elif "story" in message:
         print(f"Nova: Heres a short story for you!\n{random.choice(story)}")
         chat()
+    
+    elif "🐒🍌" == message:
+        if client == "monke":
+            print("Nova: 🐒🍌")
+            chat()
+        else:
+            print("Nova: I do not understand this. Try using !responses! 🐒🍌")
+            chat()  
 
     elif any(greeting.lower() in message for greeting in greeting_list):
         print(f"Nova: {random.choice(greeting_list)}")
@@ -228,15 +222,39 @@ def chat():
         print("Nova: I do not understand this. Try using !responses!")
         chat()
 
+if client == "dev":
+    print(color.BOLD + color.RED + "Nova: YOU ARE IN THE DEBUG MODE OF NOVA!")
+    name = "DEV"
+    chat()
 
-# Introduction
-print("Nova: Hello there! I'm Nova! What is your name?")
-name = input("Your name: ")
-if name.lower() == "nova":
+elif client == "monke":
+    print(color.YELLOW + color.BOLD + "Nova: 🐒🍌")
+    name = "MONKE"
+    chat()
+
+elif client == "nova".lower():
     name = "Fake Nova"
-print(f"Nova: {random.choice(greeting_list)}, {name}! That's a great name!")
-print("Launching Nova...")
-time.sleep(3)
-cls()
-print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
-chat()
+    print("Launching Nova...")
+    time.sleep(3)
+    cls()
+    print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
+    chat()
+
+elif client == "user":
+    # Introduction
+    print("Nova: Hello there! I'm Nova! What is your name?")
+    name = input("Your name: ")
+    
+    if name.lower() == "nova":
+        name = "Fake Nova"
+    elif name.lower() == "dev":
+        name = "User"
+
+    print(f"Nova: {random.choice(greeting_list)}, {name}! That's a great name!")
+    print("Launching Nova...")
+    time.sleep(3)
+    cls()
+    print(f"Nova: {random.choice(greeting_list)}, {name}! I'm Nova! Your personal Python AI! I can tell dad jokes, just chat with you, and more! Don't know where to start? Just say !responses for what I can do!")
+    chat()
+else:
+    print(color.RED + "System: ERROR! INVALID CLIENT!")
